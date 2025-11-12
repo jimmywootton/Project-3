@@ -1,0 +1,17 @@
+#map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    position: relative;
+}
+  
+.tooltip {
+    position: absolute;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    border-radius: 6px;
+    pointer-events: none;
+}
