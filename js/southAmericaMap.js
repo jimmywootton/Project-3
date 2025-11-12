@@ -22,9 +22,11 @@ export function createSouthAmericaMap(southAmerica, selector) {
     const path = d3.geoPath(projection);
   
     const svg = d3.select(selector)
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height);
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .style("position", "relative")
+        .style("z-index", "2");
   
     // Country borders only
     svg.selectAll("path")
@@ -35,5 +37,5 @@ export function createSouthAmericaMap(southAmerica, selector) {
       .attr("fill", "none")
       .attr("stroke", "#ccc")
       .attr("stroke-width", 0.7);
-  }
+}
   
