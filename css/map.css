@@ -1,11 +1,31 @@
-#map-container {
+#map-wrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;  /* centers horizontally */
     justify-content: center;
-    align-items: center;
-    margin: 2rem auto;
+    min-height: 100vh;    /* optional: centers vertically in viewport */
+}
+
+#map-container {
     position: relative;
+    width: 800px;   /* match your new SVG */
+    height: 1000px;  /* make square */
+    padding: 0;
+    margin: 0;
 }
   
+#modis-image {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;   /* fill the container */
+    height: 100%;  /* fill the container */
+    z-index: 0;    /* behind the SVG */
+    opacity: 1;
+}
+
 .tooltip {
     position: absolute;
     font-size: 0.9rem;

@@ -1,42 +1,33 @@
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import * as topojson from "https://cdn.jsdelivr.net/npm/topojson-client@3/+esm";
 import { createTimeSlider } from "./slider.js";
 import { createSouthAmericaMap } from "./southAmericaMap.js";
 import { addMODISLayer, updateMODISLayer } from "./modisLayer.js";
 
-const alpha3ToNum = {
-    "ARG": "032",
-    "BOL": "068",
-    "BRA": "076",
-    "CHL": "152",
-    "COL": "170",
-    "ECU": "218",
-    "GUY": "328",
-    "PRY": "600",
-    "PER": "604",
-    "SUR": "740",
-    "URY": "858",
-    "VEN": "862"
-};
+async function init() {
+    // Load world TopoJSON
+    const world = await d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
+    const countries = topojson.feature(world, world.objects.countries).features;
 
-const sampleData = [
-    { id: "076", value: 8 },
-    { id: "604", value: 5 },
-    { id: "170", value: 6 },
-    { id: "032", value: 3 }
-];
-  
-// Add initial MODIS layer
-addMODISLayer("#map-container", "2005-01-01");
+    // Filter South America
+    const southAmericaCodes = new Set([
+        "032","068","076","152","170","218","328","600","604","740","858","862"
+    ]);
+    const southAmerica = countries.filter(d => southAmericaCodes.has(d.id));
 
-// Add choropleth overlay
-createSouthAmericaMap(sampleData, "#map-container");
+    // Add MODIS layer
+    addMODISLayer("#map-container", "2005-01-01");
 
-// Add slider
-createTimeSlider({
-    parentSelector: "#slider-container",
-    startYear: 2005,
-    endYear: 2024,
-    onChange: (date) => {
-        console.log("Selected date:", date);
-        updateMODISLayer(date); // update MODIS layer dynamically
-    }
-});
+    // Add country borders
+    createSouthAmericaMap(southAmerica, "#map-container");
+
+    // Add slider
+    createTimeSlider({
+        parentSelector: "#slider-container",
+        startYear: 2005,
+        endYear: 2024,
+        onChange: (date) => updateMODISLayer(date)
+    });
+}
+
+init();

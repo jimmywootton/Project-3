@@ -12,13 +12,13 @@ const LAYER = "MODIS_Aqua_L4_Net_Photosynthesis_8Day";
  * Adjust as needed: lat/lon in EPSG:4326
  */
 
-const DEFAULT_BBOX = "-58,-85,10,-30";
+const DEFAULT_BBOX = "-47,-81.4,13,-34";
 
 /**
  * Default image resolution
  */
 const WIDTH = 800;
-const HEIGHT = 800;
+const HEIGHT = 1000;
 
 /**
  * Build the WMS URL for a given date and bounding box
@@ -27,58 +27,45 @@ const HEIGHT = 800;
  */
 function buildWMSUrl(dateStr, bbox = DEFAULT_BBOX) {
   const params = new URLSearchParams({
-    service: "WMS",
-    version: "1.3.0",
-    request: "GetMap",
-    layers: LAYER,
-    styles: "",
-    format: "image/png",
-    transparent: "true",
-    crs: "EPSG:4326",
-    bbox: bbox,
-    width: WIDTH,
-    height: HEIGHT,
-    time: dateStr
+      service: "WMS",
+      version: "1.3.0",
+      request: "GetMap",
+      layers: LAYER,
+      styles: "",
+      format: "image/png",
+      transparent: "true",
+      crs: "EPSG:4326",
+      bbox: bbox,
+      width: WIDTH,
+      height: HEIGHT,
+      time: dateStr
   });
   return `${GIBS_URL}?${params.toString()}`;
 }
 
-/**
- * Add the MODIS layer to a container
- * @param {string} parentSelector - DOM selector
- * @param {string} dateStr - YYYY-MM-DD
- */
 export function addMODISLayer(parentSelector, dateStr = "2020-01-01") {
   const container = d3.select(parentSelector);
-
-  // Check if image already exists
   let img = container.select("#modis-image");
+
   if (img.empty()) {
-    img = container.append("img")
-      .attr("id", "modis-image")
-      .style("position", "absolute")
-      .style("top", "0")
-      .style("left", "0")
-      .style("width", "100%")
-      .style("height", "100%")
-      .style("z-index", "0")
+      img = container.append("img")
+          .attr("id", "modis-image")
+          .style("position", "absolute")
+          .style("top", "0")
+          .style("left", "0")
+          .style("width", `${WIDTH}px`)
+          .style("height", `${HEIGHT}px`)
+          .style("z-index", "0")
+          .style("opacity", "1");
   }
 
   img.attr("src", buildWMSUrl(dateStr));
 }
 
-/**
- * Update the MODIS layer to a new date
- * @param {string} dateStr - YYYY-MM-DD
- */
 export function updateMODISLayer(dateStr) {
   d3.select("#modis-image").attr("src", buildWMSUrl(dateStr));
 }
 
-/**
- * Optional: set custom bounding box for Amazon or subset
- */
 export function setMODISBBox(bbox) {
-  // override default
   DEFAULT_BBOX = bbox;
 }
