@@ -1,5 +1,7 @@
 import { createTimeSlider } from "./slider.js";
 import { createSouthAmericaMap } from "./southAmericaMap.js";
+import { addMODISLayer, updateMODISLayer } from "./modisLayer.js";
+
 const alpha3ToNum = {
     "ARG": "032",
     "BOL": "068",
@@ -22,14 +24,19 @@ const sampleData = [
     { id: "032", value: 3 }
 ];
   
+// Add initial MODIS layer
+addMODISLayer("#map-container", "2005-01-01");
+
+// Add choropleth overlay
 createSouthAmericaMap(sampleData, "#map-container");
 
+// Add slider
 createTimeSlider({
     parentSelector: "#slider-container",
     startYear: 2005,
     endYear: 2024,
     onChange: (date) => {
         console.log("Selected date:", date);
-        // Later: update the MODIS image here
+        updateMODISLayer(date); // update MODIS layer dynamically
     }
 });
