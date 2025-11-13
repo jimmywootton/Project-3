@@ -46,16 +46,6 @@ export function createSouthAmericaMap(southAmerica, selector) {
         .style("top", 0)
         .style("left", 0)
         .style("z-index", "2"); // draw above MODIS
-
-    // 👇 Clip a little bit off the bottom (e.g. 5%)
-    // const CLIP_BOTTOM = HEIGHT * 0.95; // keeps the top 95%
-    // svg.append("clipPath")
-    //     .attr("id", "bottom-clip")
-    //     .append("rect")
-    //     .attr("x", 0)
-    //     .attr("y", 0)
-    //     .attr("width", WIDTH)
-    //     .attr("height", CLIP_BOTTOM);
     // Draw country borders with vertical flattening
     svg.append("g")
         .attr("transform", "translate(20, 62.5) scale(0.95, 0.85)") // flatten vertically; adjust as needed
@@ -65,6 +55,6 @@ export function createSouthAmericaMap(southAmerica, selector) {
         .append("path")
         .attr("d", path)
         .attr("fill", "none")
-        .attr("stroke", "#ccc")
+        .attr("stroke", "#000")
         .attr("stroke-width", 5);
 }
