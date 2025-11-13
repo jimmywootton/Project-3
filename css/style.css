@@ -12,6 +12,13 @@ body {
     text-align: center;
 }
 
+#writeup {
+    max-width: 850px;
+    margin: 60px auto;
+    line-height: 1.6;
+    font-family: system-ui, sans-serif;
+}
+
 #controls {
     display: flex;
     gap: 20px;
