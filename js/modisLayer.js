@@ -12,7 +12,7 @@ const LAYER = "MODIS_Aqua_L4_Net_Photosynthesis_8Day";
  * Adjust as needed: lat/lon in EPSG:4326
  */
 
-const DEFAULT_BBOX = "-47,-81.4,13,-34";
+const DEFAULT_BBOX = "-41,-81.4,13,-34";
 
 /**
  * Default image resolution

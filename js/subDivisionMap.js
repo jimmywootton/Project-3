@@ -9,8 +9,9 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
  * @param {Object} subdivisions - GeoJSON FeatureCollection
  * @param {string} selector - CSS selector for SVG container
  * @param {d3.GeoProjection} projection - existing projection (e.g. from country map)
+ * @param {number} verticalSquish - scale factor for vertical compression (default: 0.85)
  */
-export function createSubdivisionMap(subdivisions, selector, projection) {
+export function createSubdivisionMap(subdivisions, selector, projection, verticalSquish = 1.01) {
     const container = document.querySelector(selector);
     const WIDTH = container.clientWidth || 600;
     const HEIGHT = container.clientHeight || 800;
@@ -33,6 +34,7 @@ export function createSubdivisionMap(subdivisions, selector, projection) {
     const path = d3.geoPath(projection);
 
     svg.append("g")
+        .attr("transform", `translate(-5, 30) scale(1.01, ${verticalSquish})`) // Move down and squish
         .selectAll("path")
         .data(subdivisions.features)
         .enter()
@@ -40,7 +42,7 @@ export function createSubdivisionMap(subdivisions, selector, projection) {
         .attr("d", path)
         .attr("fill", "none")
         .attr("stroke", "#444")
-        .attr("stroke-width", 1.5);
+        .attr("stroke-width", 1.5 / verticalSquish); // Adjust stroke width to compensate
 
     // Add legend for MODIS layer
     const legendWidth = 300;
@@ -49,8 +51,8 @@ export function createSubdivisionMap(subdivisions, selector, projection) {
 
     svg.append("image")
         .attr("href", "https://gibs.earthdata.nasa.gov/legends/MODIS_Net_Photosynthesis_V.svg")
-        .attr("x", WIDTH - legendWidth - padding)
-        .attr("y", HEIGHT - legendHeight - padding)
+        .attr("x", WIDTH - legendWidth)
+        .attr("y", HEIGHT - legendHeight)
         .attr("width", legendWidth)
         .attr("height", legendHeight)
         .style("pointer-events", "none");
