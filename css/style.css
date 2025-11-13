@@ -8,6 +8,18 @@ body {
     padding: 1em;
 }
 
+h1 {
+    text-align: center;
+    margin-top: 20px;    /* optional: space from top */
+    margin-bottom: 20px; /* optional: space below */
+}
+
+h3 {
+    text-align: center;
+    margin-top: 20px;    /* optional: space from top */
+    margin-bottom: 20px; /* optional: space below */
+    color: gray;
+}
 
 #controls {
     display: flex;
