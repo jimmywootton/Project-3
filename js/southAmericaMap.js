@@ -62,10 +62,10 @@ export function createSouthAmericaMap(southAmerica, selector) {
     const legendWidth = legendHeight * (144 / 307);  // preserve aspect ratio ≈ 141
     svg.append("image")
         .attr("href", "https://gibs.earthdata.nasa.gov/legends/MODIS_Net_Photosynthesis_V.svg")
-        .attr("x", WIDTH - legendWidth - 20)   // 20px from right
-        .attr("y", HEIGHT - legendHeight - 20) // 20px from bottom
-        .attr("width", legendWidth)
-        .attr("height", legendHeight)
-        .style("pointer-events", "none");
+        .attr("x", WIDTH - 320)   // 20px padding from right
+        .attr("y", HEIGHT - 320)  // 20px padding from bottom
+        .attr("width", 300)  // scale to fit
+        .attr("height", 300)
+        .style("pointer-events", "none"); // optional: prevent interfering with interactions
 
 }
