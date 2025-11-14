@@ -6,20 +6,44 @@ const events = {
   "2005": [
     { title: "Amazon Drought", description: "Severe drought affected the Amazon basin", icon: "🌵" }
   ],
+  "2006": [
+    { title: "Fire Supression", description: "Fire-driven damage relative to last year's drought was reduced", icon: "🔥" }
+  ],
   "2007": [
     { title: "Deforestation Peak", description: "High rates of Amazon deforestation recorded", icon: "🪓" }
+  ],
+  "2008": [
+    { title: "Continued Deforestation", description: "~12,911 km² forest lost", icon: "🪓" }
+  ],
+  "2009": [
+    { title: "Forest Conversion", description: "Many recently deforested areas by this time were being converted to pasture", icon: "🐄" }
   ],
   "2010": [
     { title: "Major Drought", description: "Second major drought in 5 years", icon: "☀️" }
   ],
+  "2011": [
+    { title: "Major Drought", description: "Second major drought in 5 years", icon: "☀️" }
+  ],
   "2012": [
     { title: "Forest Code Reform", description: "Brazil Forest Code is significantly reformed", icon: "📜" }
+  ],
+  "2013": [
+    { title: "Forest Degradation", description: "Continued effects of logging continue to degrade remaining forest", icon: "🤒" }
+  ],
+  "2014": [
+    { title: "Extreme Climate Variability", description: "Climate extremes like droughts and floods stressed the ecosystem", icon: "🌦️" }
   ],
   "2015": [
     { title: "El Niño", description: "Strong El Niño event caused drought conditions", icon: "🌊" }
   ],
   "2016": [
     { title: "Paris Agreement", description: "Climate agreement entered into force", icon: "🌍" }
+  ],
+  "2017": [
+    { title: "Forest Resilience Decline", description: "Some parts of the Amazon show reduced forest resilience, making them more vulnerable to disturbances", icon: "🤏" }
+  ],
+  "2018": [
+    { title: "Reduced Environmental Protections", description: "Jair Bolsonaro is elected president of Brazil and enacts many anti-climate policies", icon: "🇧🇷" }
   ],
   "2019": [
     { title: "Amazon Wildfires", description: "Numerous fires in the Amazon", icon: "🔥" }
@@ -29,6 +53,9 @@ const events = {
   ],
   "2021": [
     { title: "Drought Returns", description: "Severe drought in parts of Brazil", icon: "🌵" }
+  ],
+  "2022": [
+    { title: "Severe Resilience Loss", description: "By now, forest degradation due to prolonged effects was a bigger detriment than deforestation vegetation dieback", icon: "🤏" }
   ],
   "2023": [
     { title: "Record Temperatures", description: "Record temperatures recorded in the Amazon", icon: "🌡️" }
