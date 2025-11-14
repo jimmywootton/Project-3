@@ -3,6 +3,7 @@ import { createTimeSlider } from "./slider.js";
 import { addMODISLayer, updateMODISLayer } from "./modisLayer.js";
 import { createSubdivisionMap } from "./subDivisionMap.js";
 import { createMODISLegend } from "./legend.js";
+import { createTimelineEvents } from "./timeline-events.js";
 
 const subdivisions = await d3.json("data/south_america.json");
 window.subdivisions = subdivisions;
@@ -32,12 +33,19 @@ async function init() {
     // Add legend
     createMODISLegend("#map-container");
 
+    // Add timeline events panel
+    const { updateEvents } = createTimelineEvents("#map-container", "2005");
+
     // Add time slider
     createTimeSlider({
         parentSelector: "#slider-container",
         startYear: 2005,
         endYear: 2024,
-        onChange: (date) => updateMODISLayer(date)
+        onChange: (date) => {
+            const year = date.slice(0, 4);
+            updateMODISLayer(date);
+            updateEvents(year);
+        }
     });
 }
 
