@@ -33,9 +33,6 @@ const events = {
   ],
   "2023": [
     { title: "Record Temperatures", description: "Global temperature records broken", icon: "🌡️" }
-  ],
-  "2024": [
-    { title: "COP29", description: "UN Climate Change Conference", icon: "🌍" }
   ]
 };
 
