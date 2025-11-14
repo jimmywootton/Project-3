@@ -48,12 +48,4 @@ export function createSubdivisionMap(subdivisions, selector, projection, vertica
     const legendWidth = 300;
     const legendHeight = 300;
     const padding = 20;
-
-    svg.append("image")
-        .attr("href", "https://gibs.earthdata.nasa.gov/legends/MODIS_Net_Photosynthesis_V.svg")
-        .attr("x", WIDTH - legendWidth)
-        .attr("y", HEIGHT - legendHeight)
-        .attr("width", legendWidth)
-        .attr("height", legendHeight)
-        .style("pointer-events", "none");
 }

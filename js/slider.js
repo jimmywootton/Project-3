@@ -89,41 +89,63 @@ export function createTimeSlider({
         .on("mouseover", () => handle.transition().duration(100).attr("r", 20))
         .on("mouseout", () => handle.transition().duration(100).attr("r", 16));
 
-    // // Tooltip
-    // const tooltip = d3.select(parentSelector)
-    //     .append("div")
-    //     .style("position", "absolute")
-    //     .style("background", "rgba(0,0,0,0.75)")
-    //     .style("color", "#fff")
-    //     .style("padding", "4px 8px")
-    //     .style("border-radius", "4px")
-    //     .style("font-size", "12px")
-    //     .style("pointer-events", "none")
-    //     .style("opacity", 0);
+    // Tooltip for showing year while dragging
+    const tooltip = d3.select(parentSelector)
+        .append("div")
+        .style("position", "absolute")
+        .style("background", "rgba(30, 144, 255, 0.9)")
+        .style("color", "#fff")
+        .style("padding", "6px 12px")
+        .style("border-radius", "6px")
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .style("pointer-events", "none")
+        .style("opacity", 0)
+        .style("transition", "opacity 0.2s");
 
     function showTooltip(dateStr, x, y) {
         tooltip.style("opacity", 1)
-            .html(dateStr)
+            .html(dateStr.slice(0, 4))
             .style("left", `${x}px`)
-            .style("top", `${y - 30}px`);
+            .style("top", `${y - 40}px`);
     }
 
     function hideTooltip() {
         tooltip.style("opacity", 0);
     }
 
-    // Drag behavior
+    // Track last committed index to avoid redundant updates
+    let lastCommittedIndex = 0;
+
+    // Drag behavior - only update visual during drag, call onChange on end
     const drag = d3.drag()
+        .on("start", () => {
+            handle.style("cursor", "grabbing");
+        })
         .on("drag", event => {
             const rawIndex = xScale.invert(event.x);
             const clampedIndex = Math.max(0, Math.min(dates.length - 1, Math.round(rawIndex)));
 
+            // Update visuals immediately
             handle.attr("cx", xScale(clampedIndex));
             progress.attr("x2", xScale(clampedIndex));
-            onChange(dates[clampedIndex]);
-            // showTooltip(dates[clampedIndex], event.x + 20, height / 2);
+            
+            // Show tooltip
+            showTooltip(dates[clampedIndex], event.x, height / 2);
         })
-        // .on("end", hideTooltip);
+        .on("end", event => {
+            const rawIndex = xScale.invert(event.x);
+            const clampedIndex = Math.max(0, Math.min(dates.length - 1, Math.round(rawIndex)));
+            
+            // Only call onChange if the date actually changed
+            if (clampedIndex !== lastCommittedIndex) {
+                lastCommittedIndex = clampedIndex;
+                onChange(dates[clampedIndex]);
+            }
+            
+            handle.style("cursor", "grab");
+            hideTooltip();
+        });
 
     handle.call(drag);
 
@@ -136,13 +158,18 @@ export function createTimeSlider({
 
         handle.transition().duration(250).attr("cx", xScale(nearestIndex));
         progress.transition().duration(250).attr("x2", xScale(nearestIndex));
-        onChange(dates[nearestIndex]);
+        
+        if (nearestIndex !== lastCommittedIndex) {
+            lastCommittedIndex = nearestIndex;
+            onChange(dates[nearestIndex]);
+        }
     });
 
     // Programmatic control
     function setDate(dateStr) {
         const index = dates.indexOf(dateStr);
         if (index !== -1) {
+            lastCommittedIndex = index;
             handle.attr("cx", xScale(index));
             progress.attr("x2", xScale(index));
             onChange(dateStr);
