@@ -13,7 +13,7 @@ const events = {
     { title: "Major Drought", description: "Second major drought in 5 years", icon: "☀️" }
   ],
   "2012": [
-    { title: "Forest Code Reform", description: "Brazil reformed its Forest Code", icon: "📜" }
+    { title: "Forest Code Reform", description: "Brazil Forest Code is significantly reformed", icon: "📜" }
   ],
   "2015": [
     { title: "El Niño", description: "Strong El Niño event caused drought conditions", icon: "🌊" }
@@ -22,18 +22,20 @@ const events = {
     { title: "Paris Agreement", description: "Climate agreement entered into force", icon: "🌍" }
   ],
   "2019": [
-    { title: "Amazon Wildfires", description: "Record number of fires in the Amazon", icon: "🔥" }
+    { title: "Amazon Wildfires", description: "Numerous fires in the Amazon", icon: "🔥" }
   ],
   "2020": [
     { title: "COVID-19 Pandemic", description: "Global pandemic, reduced human activity", icon: "🦠" },
-    { title: "Increased Deforestation", description: "Deforestation surged during pandemic", icon: "🪓" }
   ],
   "2021": [
-    { title: "Drought Returns", description: "Worst drought in 50 years in parts of Brazil", icon: "🌵" }
+    { title: "Drought Returns", description: "Severe drought in parts of Brazil", icon: "🌵" }
   ],
   "2023": [
-    { title: "Record Temperatures", description: "Global temperature records broken", icon: "🌡️" }
-  ]
+    { title: "Record Temperatures", description: "Record temperatures recorded in the Amazon", icon: "🌡️" }
+  ],
+  "2024": [
+    { title: "Forest Fires", description: "Most devestating forest fire season in over 2 decades", icon: "🔥" }
+  ],
 };
 
 export function createTimelineEvents(parentSelector, currentYear = "2005") {
