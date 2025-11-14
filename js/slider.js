@@ -8,7 +8,7 @@ export function createTimeSlider({
 }) {
     const dates = [];
     for (let y = startYear; y <= endYear; y++) {
-        dates.push(`${y}-01-01`);
+        dates.push(`${y}-06-01`);
     }
 
     const width = 1000;

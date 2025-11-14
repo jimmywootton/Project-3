@@ -25,7 +25,7 @@ const filtered = {
 
 async function init() {
     // Add MODIS layer with transformation
-    addMODISLayer("#map-container", "2005-01-01");
+    addMODISLayer("#map-container", "2005-06-01");
 
     // Add subdivisions
     createSubdivisionMap(filtered, "#map-container", projection);
